@@ -1,5 +1,6 @@
 package com.skilldistillery.trailrun.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
@@ -46,6 +47,7 @@ class TrailRunTest {
 	@DisplayName("testing trailrun mappings")
 	void test1() {
 		assertNotNull(trailRun);
+		assertEquals("test", trailRun.getName());
 	}
 	
 }

@@ -1,0 +1,3 @@
+rootProject.name = 'TrailRunTracker'
+
+includeFlat 'JPATrailRunTracker'
