@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.trailrun.entities.TrailRun;
+import com.skilldistillery.trailrun.entities.TrailType;
 import com.skilldistillery.trailrun.services.TrailRunService;
 
 @RestController
@@ -97,8 +98,28 @@ public class TrailRunController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(409); // conflict, trying to delete a run with tied child relationships
-			
 		}
+	}
+	
+	@GetMapping("trailruns/search/trailtype/{type}")
+	public List<TrailRun> findRunsByTrailType(
+			@PathVariable TrailType type,
+			HttpServletResponse response
+	){
+		List<TrailRun> runs = null;
+		try {
+			runs = trailSvc.findByTrailType(type);
+			if (type == null) {
+				response.setStatus(404);
+			}
+			return runs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			runs = null;
+		}
+		return runs;
+		
 		
 	}
 	

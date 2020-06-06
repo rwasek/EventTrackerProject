@@ -1,13 +1,14 @@
 package com.skilldistillery.trailrun.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.log4j.lf5.viewer.configure.MRUFileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.trailrun.entities.TrailRun;
+import com.skilldistillery.trailrun.entities.TrailType;
 import com.skilldistillery.trailrun.repositories.TrailRunRepository;
 
 @Service
@@ -17,12 +18,20 @@ public class TrailRunServiceImpl implements TrailRunService {
 	TrailRunRepository trailRepo;
 
 	@Override
-	public List<TrailRun> getAll() {
-		return trailRepo.findAll();
+	public List<TrailRun> getAll() { // returns only runs that have not been disabled
+		List<TrailRun> allRuns = trailRepo.findAll();
+		List<TrailRun> activeRuns = new ArrayList<>();
+		for (TrailRun trailRun : allRuns) {
+			if (trailRun.getActive() == true) {
+				activeRuns.add(trailRun);
+			}
+			else activeRuns.remove(trailRun);
+		}
+		return activeRuns;
 	}
 
 	@Override
-	public TrailRun findRunById(Integer tId) {
+	public TrailRun findRunById(Integer tId) { // returns any run ID, even a disabled run
 		Optional<TrailRun> optRun = trailRepo.findById(tId);
 		TrailRun trailRun = null;
 		
@@ -73,6 +82,12 @@ public class TrailRunServiceImpl implements TrailRunService {
 			disabled = true;
 		}
 		return disabled;
+		
+	}
+
+	@Override
+	public List<TrailRun> findByTrailType(TrailType trailType) {
+			return trailRepo.findByTrailType(trailType);
 		
 	}
 
