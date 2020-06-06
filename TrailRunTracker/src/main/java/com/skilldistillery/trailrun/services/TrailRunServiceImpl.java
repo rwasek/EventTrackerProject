@@ -3,6 +3,7 @@ package com.skilldistillery.trailrun.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.lf5.viewer.configure.MRUFileManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,15 +33,32 @@ public class TrailRunServiceImpl implements TrailRunService {
 	}
 
 	@Override
-	public TrailRun createNewRun() {
-		// TODO Auto-generated method stub
-		return null;
+	public TrailRun createNewRun(TrailRun trailRun) {
+		return trailRepo.save(trailRun);
 	}
 
 	@Override
-	public TrailRun updateRunById(Integer tId) {
-		// TODO Auto-generated method stub
-		return null;
+	public TrailRun updateRun(TrailRun trailRun, Integer tId) {
+		TrailRun managedRun = null;
+		Optional<TrailRun> existingRun = trailRepo.findById(tId);
+		if (existingRun.isPresent()) {
+			managedRun = existingRun.get();
+			managedRun.setTrailName(trailRun.getTrailName());
+			managedRun.setLocation(trailRun.getLocation());
+			managedRun.setDate(trailRun.getDate());
+			managedRun.setTotalTime(trailRun.getTotalTime());
+			managedRun.setDistance(trailRun.getDistance());
+			managedRun.setAveragePace(trailRun.getAveragePace());
+			managedRun.setBestPace(trailRun.getBestPace());
+			managedRun.setElevationGain(trailRun.getElevationGain());
+			managedRun.setMaxHeartRate(trailRun.getMaxHeartRate());
+			managedRun.setAvgHeartRate(trailRun.getAvgHeartRate());
+			managedRun.setDescription(trailRun.getDescription());
+			managedRun.setTrailType(trailRun.getTrailType());
+			managedRun.setActive(trailRun.getActive());
+			trailRepo.saveAndFlush(managedRun);
+		}
+		return managedRun;
 	}
 
 	@Override
@@ -48,4 +66,6 @@ public class TrailRunServiceImpl implements TrailRunService {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }
