@@ -112,6 +112,19 @@ public class TrailRunServiceImpl implements TrailRunService {
 		return activeRunsByRange;
 	}
 
+	@Override
+	public List<TrailRun> findByLocationKeyword(String locationKeyword) {
+		List<TrailRun> runsByLocation = trailRepo.queryByLocationContaining(locationKeyword);
+		List<TrailRun> activeRunsByLocation = new ArrayList<>();
+		for (TrailRun trailRun : runsByLocation) {
+			if(trailRun.getActive() == true) {
+				activeRunsByLocation.add(trailRun);
+			}
+			else activeRunsByLocation.remove(trailRun);
+		}
+		return activeRunsByLocation;
+	}
+
 	
 
 

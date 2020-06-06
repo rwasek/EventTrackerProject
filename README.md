@@ -18,6 +18,8 @@ This project involved creating and populating a Database schema, a JPA Project, 
 | TrailRun | PUT | api/trailruns/{tId} | Updates an existing Trail Run by ID |
 | Void | PUT | api/trailruns/disable/{tId} | Disables an existing Trail Run by ID |
 | List&lt;TrailRun&gt; | GET | api/trailruns/search/trailtype/{type} | Retrieve List of Trail Runs of a certain Enum type ("LIGHT", "MODERATE", "RUGGED") |
+| List&lt;TrailRun&gt; | GET | api/trailruns/search/distance/{min}/{max} | Retrieve List of Trail Runs within a specific distance range (in miles) |
+
 ## Technologies Used
 * MySQL, MySQL Workbench
 * Java/Hibernate

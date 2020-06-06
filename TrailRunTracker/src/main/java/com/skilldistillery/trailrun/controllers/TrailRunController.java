@@ -148,6 +148,27 @@ public class TrailRunController {
 		return runs;
 	}
 	
+	@GetMapping("trailruns/search/location/{keyword}")
+	public List<TrailRun> findRunsByLocationKeyword(
+			@PathVariable String keyword,
+			HttpServletResponse response
+	){
+		List<TrailRun> runs = null;
+		try {
+			runs = trailSvc.findByLocationKeyword(keyword);
+			if (keyword == null) {
+				response.setStatus(404);
+			}
+			return runs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			runs = null;
+		}
+		return runs;
+	}
+	
+	
 	
 
 }
