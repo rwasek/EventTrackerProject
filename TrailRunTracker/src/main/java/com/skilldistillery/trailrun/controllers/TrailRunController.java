@@ -81,5 +81,27 @@ public class TrailRunController {
 		}
 		return trailRun;
 	}
+	
+	@PutMapping("trailruns/disable/{tId}")
+	public void disableRun( // postman will show true/false, may refactor as a void for future
+			@PathVariable Integer tId,
+			HttpServletResponse response	
+	) {
+		try {
+			if(trailSvc.disableRun(tId)) {
+				response.setStatus(204); // ID was valid / 204 no content
+			}
+			else {
+				response.setStatus(404); // invalid ID, run not found
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(409); // conflict, trying to delete a run with tied child relationships
+			
+		}
+		
+	}
+	
+	
 
 }

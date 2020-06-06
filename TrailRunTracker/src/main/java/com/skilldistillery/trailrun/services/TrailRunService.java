@@ -9,6 +9,6 @@ public interface TrailRunService {
 	TrailRun findRunById(Integer tId);
 	TrailRun createNewRun(TrailRun trailRun);
 	TrailRun updateRun(TrailRun trailRun, Integer tId);
-	void disableRunById(Integer tId);
+	boolean disableRun(Integer tId);
 	
 }

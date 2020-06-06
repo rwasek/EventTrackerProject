@@ -62,8 +62,17 @@ public class TrailRunServiceImpl implements TrailRunService {
 	}
 
 	@Override
-	public void disableRunById(Integer tId) {
-		// TODO Auto-generated method stub
+	public boolean disableRun(Integer tId) {
+		boolean disabled = false;
+		Optional<TrailRun> trailRunToDisable = trailRepo.findById(tId);
+		TrailRun managedRun = null;
+		if(trailRunToDisable.isPresent()) {
+			managedRun = trailRunToDisable.get();
+			managedRun.setActive(false);
+			trailRepo.saveAndFlush(managedRun);
+			disabled = true;
+		}
+		return disabled;
 		
 	}
 
