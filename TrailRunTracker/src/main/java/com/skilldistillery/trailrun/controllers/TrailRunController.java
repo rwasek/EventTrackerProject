@@ -25,10 +25,12 @@ public class TrailRunController {
 	@Autowired
 	TrailRunService trailSvc;
 	
+	
 	@GetMapping("trailruns")
 	public List<TrailRun> index(){
 		return trailSvc.getAll();
 	}
+	
 	
 	@GetMapping("trailruns/{tId}")
 	public TrailRun retrieve(
@@ -41,6 +43,7 @@ public class TrailRunController {
 		}
 		return trailRun;
 	}
+	
 	
 	@PostMapping("trailruns")
 	public TrailRun createNew(
@@ -61,6 +64,7 @@ public class TrailRunController {
 		}
 		return trailRun;
 	}
+	
 	
 	@PutMapping("trailruns/{tId}")
 	public TrailRun updateRun(
@@ -83,6 +87,7 @@ public class TrailRunController {
 		return trailRun;
 	}
 	
+	
 	@PutMapping("trailruns/disable/{tId}")
 	public void disableRun( // postman will show true/false, may refactor as a void for future
 			@PathVariable Integer tId,
@@ -100,6 +105,7 @@ public class TrailRunController {
 			response.setStatus(409); // conflict, trying to delete a run with tied child relationships
 		}
 	}
+	
 	
 	@GetMapping("trailruns/search/trailtype/{type}")
 	public List<TrailRun> findRunsByTrailType(
@@ -119,8 +125,27 @@ public class TrailRunController {
 			runs = null;
 		}
 		return runs;
-		
-		
+	}
+	
+	@GetMapping("trailruns/search/distance/{min}/{max}")
+	public List<TrailRun> findRunsByDistanceRange(
+			@PathVariable Double min,
+			@PathVariable Double max,
+			HttpServletResponse response
+	){
+		List<TrailRun> runs = null;
+		try {
+			runs = trailSvc.findByMixMaxDistance(min, max);
+			if (min == null || max == null) {
+				response.setStatus(404);
+			}
+			return runs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			runs = null;
+		}
+		return runs;
 	}
 	
 	

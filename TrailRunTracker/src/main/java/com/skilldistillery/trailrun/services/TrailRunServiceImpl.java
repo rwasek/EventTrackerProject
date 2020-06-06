@@ -81,15 +81,38 @@ public class TrailRunServiceImpl implements TrailRunService {
 			trailRepo.saveAndFlush(managedRun);
 			disabled = true;
 		}
-		return disabled;
-		
+		return disabled;		
+	}
+
+	
+	@Override
+	public List<TrailRun> findByTrailType(TrailType trailType) {
+		List<TrailRun> runsByType = trailRepo.findByTrailType(trailType);
+		List<TrailRun> activeRunsByType = new ArrayList<>();
+		for (TrailRun trailRun : runsByType) {
+			if (trailRun.getActive() == true) {
+				activeRunsByType.add(trailRun);
+			}
+			else activeRunsByType.remove(trailRun);
+		}
+		return activeRunsByType;		
 	}
 
 	@Override
-	public List<TrailRun> findByTrailType(TrailType trailType) {
-			return trailRepo.findByTrailType(trailType);
+	public List<TrailRun> findByMixMaxDistance(Double min, Double max) {
+		List<TrailRun> runsByRange = trailRepo.queryByDistanceInRange(min, max);
+		List<TrailRun> activeRunsByRange = new ArrayList<>();
+		for (TrailRun trailRun : runsByRange) {
+			if (trailRun.getActive() == true) {
+				activeRunsByRange.add(trailRun);
+			}
+			else activeRunsByRange.remove(trailRun);
+		}
 		
+		return activeRunsByRange;
 	}
+
+	
 
 
 }

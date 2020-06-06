@@ -4,7 +4,7 @@
 
 ## Overview
 
-Part I of a multi-week project to design a full-stack Trail Run Event Tracker Application:
+Part I of a multi-week project to design a full-stack Trail Run Workout Application:
 
 This project involved creating and populating a Database schema, a JPA Project, and a Spring Boot App to publish REST API Endpoints. There is one Java entity class POJO to start that is mapped with JPA from a trail_run table in my MySQL database. It will be a build-upon, and this portion was the back-end setup, focusing on CRUD operations with Spring Data JPA Repositories.  There is one POJO "TrailRun" for each Trail Run Event to be tracked. Postman was used to test the Request Mappings/CRUD methods.  Below are the API Endpoints that were developed and can be tested in Postman.
 
