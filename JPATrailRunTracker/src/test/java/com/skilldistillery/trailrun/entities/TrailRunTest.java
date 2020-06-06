@@ -1,7 +1,10 @@
 package com.skilldistillery.trailrun.entities;
 
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,7 +50,19 @@ class TrailRunTest {
 	@DisplayName("testing trailrun mappings")
 	void test1() {
 		assertNotNull(trailRun);
-		assertEquals("test", trailRun.getName());
+		assertEquals("Matthews Winters Lollipop", trailRun.getTrailName());
+		assertEquals("Golden, CO", trailRun.getLocation());
+		assertEquals("4/6/2020", trailRun.getDate());
+		assertEquals("1:15:08", trailRun.getTotalTime());
+		assertEquals(6.63, trailRun.getDistance());
+		assertEquals("11:10", trailRun.getAveragePace());
+		assertEquals("6:56", trailRun.getBestPace());
+		assertEquals(1188, trailRun.getElevationGain());
+		assertEquals(177, trailRun.getMaxHeartRate());
+		assertEquals(155, trailRun.getAvgHeartRate());
+		assertEquals(true, trailRun.getDescription().contains("Slight rolling"));
+		assertEquals(TrailType.MODERATE, trailRun.getTrailType());
+		assertEquals(true, trailRun.getActive());
 	}
 	
 }
