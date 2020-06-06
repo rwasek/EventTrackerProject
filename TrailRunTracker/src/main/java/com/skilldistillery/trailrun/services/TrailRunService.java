@@ -14,7 +14,6 @@ public interface TrailRunService {
 	boolean disableRun(Integer tId);
 	List<TrailRun> findByTrailType(TrailType trailType);
 	List<TrailRun> findByMixMaxDistance(Double min, Double max);
+	List<TrailRun> findByMinDistance(Double min);
 	List<TrailRun> findByLocationKeyword(String locationKeyword);
-
-	
 }

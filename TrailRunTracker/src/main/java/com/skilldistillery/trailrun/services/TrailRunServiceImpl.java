@@ -113,8 +113,21 @@ public class TrailRunServiceImpl implements TrailRunService {
 	}
 
 	@Override
+	public List<TrailRun> findByMinDistance(Double min) {
+		List<TrailRun> runsByMin = trailRepo.findByDistanceGreaterThanEqual(min);
+		List<TrailRun> activeRunsByMin = new ArrayList<>();
+		for (TrailRun trailRun : runsByMin) {
+			if(trailRun.getActive() == true) {
+				activeRunsByMin.add(trailRun);
+			}
+			else activeRunsByMin.remove(trailRun);
+		}
+		return activeRunsByMin;
+	}
+	
+	@Override
 	public List<TrailRun> findByLocationKeyword(String locationKeyword) {
-		List<TrailRun> runsByLocation = trailRepo.queryByLocationContaining(locationKeyword);
+		List<TrailRun> runsByLocation = trailRepo.findByLocationContaining(locationKeyword);
 		List<TrailRun> activeRunsByLocation = new ArrayList<>();
 		for (TrailRun trailRun : runsByLocation) {
 			if(trailRun.getActive() == true) {
@@ -124,6 +137,7 @@ public class TrailRunServiceImpl implements TrailRunService {
 		}
 		return activeRunsByLocation;
 	}
+
 
 	
 

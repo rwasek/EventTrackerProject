@@ -148,6 +148,26 @@ public class TrailRunController {
 		return runs;
 	}
 	
+	@GetMapping("trailruns/search/distance/{min}")
+	public List<TrailRun> findRunsByMinDistance(
+			@PathVariable Double min,
+			HttpServletResponse response
+			){
+		List<TrailRun> runs = null;
+		try {
+			runs = trailSvc.findByMinDistance(min);
+			if(min == null) {
+				response.setStatus(404);
+			}
+			return runs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			runs = null;
+		}
+		return runs;
+	}
+	
 	@GetMapping("trailruns/search/location/{keyword}")
 	public List<TrailRun> findRunsByLocationKeyword(
 			@PathVariable String keyword,
