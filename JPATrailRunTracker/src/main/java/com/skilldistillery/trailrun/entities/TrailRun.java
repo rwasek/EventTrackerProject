@@ -27,7 +27,7 @@ public class TrailRun {
 	@Column(name="total_time")
 	private String totalTime;
 	
-	private Double distance;
+	private double distance;
 	
 	@Column(name="average_pace")
 	private String averagePace;
@@ -50,7 +50,7 @@ public class TrailRun {
 	@Enumerated(EnumType.STRING)
 	private TrailType trailType;
 	
-	private Boolean active;
+	private boolean active;
 
 	// CONSTRUCTORS:
 	
@@ -120,11 +120,11 @@ public class TrailRun {
 		this.totalTime = totalTime;
 	}
 
-	public Double getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Double distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 
@@ -184,11 +184,11 @@ public class TrailRun {
 		this.trailType = trailType;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
