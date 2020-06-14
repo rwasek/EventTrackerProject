@@ -23,7 +23,6 @@ window.addEventListener("load", function (e) {
 		if (xhr.status === 200) {
 		  let trailRunJson = xhr.responseText; // var?
 		  let trailRunArray = JSON.parse(trailRunJson);
-		  console.log(trailRunArray);
 		  createTable(trailRunArray);
 		} else if (xhr.status === 404) {
 		  console.log("Runs not found"); // make a display error div
@@ -84,6 +83,7 @@ window.addEventListener("load", function (e) {
 		  tr.addEventListener('click', function(e){
 			  e.preventDefault();
 			  displayIndividualRun(individualRun);
+			  
 		  });
 		  return tr;
   }
@@ -237,14 +237,24 @@ window.addEventListener("load", function (e) {
 	let submit = document.createElement('input');
 	submit.name = 'submit';
 	submit.type = 'submit';
-	submit.value = 'Update Run'
+	submit.value = 'Update Run';
 	submit.addEventListener('click', function(e){
 		e.preventDefault();
+		console.log(individualRun);
+		console.log(individualRun.id);
 		updateRun(individualRun.id); // pass the id to update the run
-		// updateForm.reset();
 	});
 	updateForm.appendChild(submit);
 
+	let deleteButton = document.createElement('input');
+	deleteButton.name = 'submit';
+	deleteButton.type = 'submit';
+	deleteButton.value = 'Delete Run';
+	deleteButton.addEventListener('click', function(e){
+		e.preventDefault();
+		deleteRun(individualRun.id);
+	});
+	updateForm.appendChild(deleteButton);
 	individualRunDiv.appendChild(updateForm);
 	
 }
@@ -348,7 +358,6 @@ function trailOptionRugged() {
   		if (xhr.readyState === 4){
   			if (xhr.status === 200) {
 				  getEvents(); // reload the list of events after the update
-				  console.log(runJson);
   			}
   			else {
   				if (xhr.status === 400){
@@ -363,3 +372,51 @@ function trailOptionRugged() {
   	};
   	xhr.send(runJson);
   }
+
+  // Disable ("Delete") methods:
+
+  function deleteRun(runId) {
+	let form = document.updateForm;
+	let trailRun = {};
+	trailRun.id = runId;
+	trailRun.trailName = form.trailName.value;
+	trailRun.location = form.location.value;
+	trailRun.date = form.date.value;
+	trailRun.totalTime = form.totalTime.value;
+	trailRun.distance = form.distance.value;
+	trailRun.elevationGain = form.elevationGain.value;
+	trailRun.maxHeartRate = form.maxHeartRate.value;
+	trailRun.avgHeartRate = form.avgHeartRate.value;
+	trailRun.description = form.description.value;
+	trailRun.trailType = form.trailType.value;
+	trailRun.active = false;
+	console.log(trailRun);
+	deleteRunXHR(trailRun);
+} 
+
+function deleteRunXHR(individualRun) {
+	let runJson = JSON.stringify(individualRun);
+	let xhr = new XMLHttpRequest();
+	let uri = `api/trailruns/${individualRun.id}`;
+	xhr.open('PUT', uri);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function (){
+		if (xhr.readyState === 4){
+			if (xhr.status === 200) {
+				getEvents(); // reload the list of events after the update
+				let individualRunDiv = document.getElementById('trailRunDetails');
+				individualRunDiv.textContent = 'Deleted!';
+			}
+			else {
+				if (xhr.status === 400){
+					console.log('Invalid run data, unable to update')
+					// TODO: make an error div pop up
+				}
+				else if (xhr.status === 404) {
+					console.log('Not found, invalid Run');
+				}
+			}
+		}
+	};
+	xhr.send(runJson);
+}
