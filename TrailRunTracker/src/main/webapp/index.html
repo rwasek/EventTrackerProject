@@ -9,9 +9,62 @@
 
 <h1>Trail Run Event Tracker</h1>
 
-<div id="trailRunEventList"></div>
+<h2>List Of All Trail Runs:</h2>
+<h4>Click one for more detailed information!</h4>
+
+<div id="trailRunEventList">
+</div>
 <div id="trailRunDetails"></div>
 <div id="trailRunEdit"></div>
+<div id="trailRunCreate">
+    <h2>Add New Trail Run:</h2>
+    <form name="createRunForm">
+        <label for="trailName">Trail Name</label>
+        <input type="text" name="trailName" placeholder="Trail Name">
+        <br>
+        <label for="location">Location</label>
+        <input type="text" name="location" placeholder="Location">
+        <br>
+        <label for="date">Date</label>
+        <input type="text" name="date" placeholder="Date">
+        <br>
+        <label for="totalTime">Total Time</label>
+        <input type="text" name="totalTime" placeholder="Total Time">
+        <br>
+        <label for="distance">Distance</label>
+        <input type="number" step="0.01" name="distance" placeholder="Distance">
+        <br>
+        <label for="averagePace">Average Pace</label>
+        <input type="text" name="averagePace" placeholder="Average Pace">
+        <br>
+        <label for="bestPace">Best Pace</label>
+        <input type="text" name="bestPace" placeholder="Best Pace">
+        <br>
+        <label for="elevationGain">Elevation Gain</label>
+        <input type="number" name="elevationGain" placeholder="Elevation Gain">
+        <br>
+        <label for="maxHeartRate">Max Heart Rate</label>
+        <input type="number" name="maxHeartRate" placeholder="Max Heart Rate">
+        <br>
+        <label for="avgHeartRate">Average Heart Rate</label>
+        <input type="number" name="avgHeartRate" placeholder="Average Heart Rate">
+        <br>
+        <label for="description">Description of Run</label>
+        <input type="text" name="description" placeholder="Description of Run">
+        <br>
+        <label for="trailType">Type of Trail</label>
+            <select name="trailType">
+                <option value="LIGHT">Light Trail</option>
+                <option value="MODERATE">Moderate Trail</option>
+                <option value="RUGGED">Rugged Trail</option>
+            </select>
+        <br>
+        
+        <input type="submit" name="addTrailRun" value="Add Trail Run">
+    </form>
+
+
+</div>
 
 </body>
 </html>
