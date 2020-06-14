@@ -89,9 +89,183 @@ window.addEventListener("load", function (e) {
   }
   
   function displayIndividualRun(individualRun){
-	  let individualRunDiv = document.getElementById('trailRunDetails');
-	  individualRunDiv.textContent = 'You clicked?';
-  }
+	let individualRunDiv = document.getElementById('trailRunDetails');
+	let h2 = document.createElement('h2');
+	h2.textContent = 'The ' + individualRun.trailName + ' Run:';
+	individualRunDiv.appendChild(h2);
+	let updateForm = document.createElement('form');
+	updateForm.name = 'runUpdateForm'
+
+	let trailNameLabel = document.createElement('label');
+	trailNameLabel.for = 'trailName';
+	trailNameLabel.textContent = 'Trail Name';
+	let trailNameInput = document.createElement('input');
+	trailNameInput.type = 'text';
+	trailNameInput.name = 'trailName';
+	trailNameInput.value = individualRun.trailName;
+	updateForm.appendChild(trailNameLabel);
+	updateForm.appendChild(trailNameInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailLocationLabel = document.createElement('label');
+	trailLocationLabel.for = 'location';
+	trailLocationLabel.textContent = 'Location';
+	let trailLocationInput = document.createElement('input');
+	trailLocationInput.type = 'text';
+	trailLocationInput.name = 'location';
+	trailLocationInput.value = individualRun.location;
+	updateForm.appendChild(trailLocationLabel);
+	updateForm.appendChild(trailLocationInput);
+	updateForm.appendChild(document.createElement('br'));
+	
+	let trailDateLabel = document.createElement('label');
+	trailDateLabel.for = 'date';
+	trailDateLabel.textContent = 'Date';
+	let trailDateInput = document.createElement('input');
+	trailDateInput.type = 'text';
+	trailDateInput.name = 'date';
+	trailDateInput.value = individualRun.date;
+	updateForm.appendChild(trailDateLabel);
+	updateForm.appendChild(trailDateInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailTimeLabel = document.createElement('label');
+	trailTimeLabel.for = 'totalTime';
+	trailTimeLabel.textContent = 'Total Time';
+	let trailTimeInput = document.createElement('input');
+	trailTimeInput.type = 'text';
+	trailTimeInput.name = 'totalTime';
+	trailTimeInput.value = individualRun.totalTime;
+	updateForm.appendChild(trailTimeLabel);
+	updateForm.appendChild(trailTimeInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailDistanceLabel = document.createElement('label');
+	trailDistanceLabel.for = 'distance';
+	trailDistanceLabel.textContent = 'Distance';
+	let trailDistanceInput = document.createElement('input');
+	trailDistanceInput.type = 'number';
+	trailDistanceInput.step = '0.01';
+	trailDistanceInput.name = 'distance';
+	trailDistanceInput.value = individualRun.distance;
+	updateForm.appendChild(trailDistanceLabel);
+	updateForm.appendChild(trailDistanceInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailElevationLabel = document.createElement('label');
+	trailElevationLabel.for = 'elevationGain';
+	trailElevationLabel.textContent = 'Elevation Gain';
+	let trailElevationInput = document.createElement('input');
+	trailElevationInput.type = 'number';
+	trailElevationInput.name = 'elevationGain';
+	trailElevationInput.value = individualRun.elevationGain;
+	updateForm.appendChild(trailElevationLabel);
+	updateForm.appendChild(trailElevationInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailMaxHRLabel = document.createElement('label');
+	trailMaxHRLabel.for = 'maxHeartRate';
+	trailMaxHRLabel.textContent = 'Max Heart Rate';
+	let trailMaxHRInput = document.createElement('input');
+	trailMaxHRInput.type = 'number';
+	trailMaxHRInput.name = 'maxHeartRate';
+	trailMaxHRInput.value = individualRun.maxHeartRate;
+	updateForm.appendChild(trailMaxHRLabel);
+	updateForm.appendChild(trailMaxHRInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailAvgHRLabel = document.createElement('label');
+	trailAvgHRLabel.for = 'avgHeartRate';
+	trailAvgHRLabel.textContent = 'Average Heart Rate';
+	let trailAvgHRInput = document.createElement('input');
+	trailAvgHRInput.type = 'number';
+	trailAvgHRInput.name = 'avgHeartRate';
+	trailAvgHRInput.value = individualRun.avgHeartRate;
+	updateForm.appendChild(trailAvgHRLabel);
+	updateForm.appendChild(trailAvgHRInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailDescriptionLabel = document.createElement('label');
+	trailDescriptionLabel.for = 'description';
+	trailDescriptionLabel.textContent = 'Description';
+	let trailDescriptionInput = document.createElement('input');
+	trailDescriptionInput.type = 'text';
+	trailDescriptionInput.name = 'description';
+	trailDescriptionInput.value = individualRun.description;
+	updateForm.appendChild(trailDescriptionLabel);
+	updateForm.appendChild(trailDescriptionInput);
+	updateForm.appendChild(document.createElement('br'));
+
+	let trailTypeLabel = document.createElement('label');
+	trailTypeLabel.for = 'trailType';
+	trailTypeLabel.textContent = 'Type of Trail';
+	updateForm.appendChild(trailTypeLabel);
+
+	let trailTypeSelect = document.createElement('select');
+	trailTypeSelect.name = 'trailType';
+
+	let trailTypeOptionActive = document.createElement('option');
+	trailTypeOptionActive.value = individualRun.trailType;
+	if (individualRun.trailType === 'LIGHT') {
+		trailTypeOptionActive.textContent = 'Light Trail';
+		trailTypeSelect.appendChild(trailTypeOptionActive);
+		trailTypeSelect.appendChild(trailOptionModerate());
+		trailTypeSelect.appendChild(trailOptionRugged());
+		updateForm.appendChild(trailTypeSelect);
+		updateForm.appendChild(document.createElement('br'));
+	}
+	else if (individualRun.trailType === 'MODERATE') {
+		trailTypeOptionActive.textContent = 'Moderate Trail';
+		trailTypeSelect.appendChild(trailTypeOptionActive);
+		trailTypeSelect.appendChild(trailOptionLight());
+		trailTypeSelect.appendChild(trailOptionRugged());
+		updateForm.appendChild(trailTypeSelect);
+		updateForm.appendChild(document.createElement('br'));
+	}
+	else if (individualRun.trailType === 'RUGGED') {
+		trailTypeOptionActive.textContent = 'Rugged Trail';
+		trailTypeSelect.appendChild(trailTypeOptionActive);
+		trailTypeSelect.appendChild(trailOptionModerate());
+		trailTypeSelect.appendChild(trailOptionLight());
+		updateForm.appendChild(trailTypeSelect);
+		updateForm.appendChild(document.createElement('br'));
+	}
+
+	let submit = document.createElement('input');
+	submit.name = 'submit';
+	submit.type = 'submit';
+	submit.value = 'Update Run'
+	submit.addEventListener('click', function(e){
+		e.preventDefault();
+		// postNewRun(individualRun);
+		// updateForm.reset();
+	});
+	updateForm.appendChild(submit);
+
+	individualRunDiv.appendChild(updateForm);
+}
+// select Enum option methods:
+  
+function trailOptionLight() {
+	let trailTypeOptionLight = document.createElement('option');
+	trailTypeOptionLight.value = 'LIGHT';
+	trailTypeOptionLight.textContent = 'Light Trail';
+	return trailTypeOptionLight;
+}
+
+function trailOptionModerate() {
+	let trailTypeOptionModerate = document.createElement('option');
+	trailTypeOptionModerate.value = 'MODERATE';
+	trailTypeOptionModerate.textContent = 'Moderate Trail';
+	return trailTypeOptionModerate;
+}
+
+function trailOptionRugged() {
+	let trailTypeOptionRugged = document.createElement('option');
+	trailTypeOptionRugged.value = 'RUGGED';
+	trailTypeOptionRugged.textContent = 'Rugged Trail';
+	return trailTypeOptionRugged;
+}
   
   // Create new  methods:
   
@@ -125,7 +299,7 @@ window.addEventListener("load", function (e) {
 		  if (xhr.readyState === 4) {
 			  if (xhr.status === 200 || xhr.status === 201) {
 				  let createdTrailRun = JSON.parse(xhr.responseText);
-				  location.reload();
+				  getEvents();
 			  }
 			  else {
 				  if (xhr.status === 400) {
