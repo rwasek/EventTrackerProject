@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `trail_run` (
   `location` VARCHAR(45) NOT NULL,
   `date` VARCHAR(45) NOT NULL,
   `total_time` VARCHAR(15) NOT NULL,
-  `distance` DECIMAL(5,2) NOT NULL,
+  `distance` DECIMAL(10,2) NOT NULL,
   `average_pace` VARCHAR(15) NULL,
   `best_pace` VARCHAR(15) NULL,
   `elevation_gain` SMALLINT NULL,
