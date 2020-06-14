@@ -24,7 +24,7 @@ window.addEventListener("load", function (e) {
 		  let trailRunJson = xhr.responseText; // var?
 		  let trailRunArray = JSON.parse(trailRunJson);
 		  createTable(trailRunArray);
-		//   aggregateMiles(trailRunArray);
+		  aggregateMiles(trailRunArray);
 		} else if (xhr.status === 404) {
 		  console.log("Runs not found"); // make a display error div
 		} else {
@@ -35,10 +35,16 @@ window.addEventListener("load", function (e) {
 	xhr.send();
   }
 
-//   function aggregateMiles(trailRunArray){
-// 	let aggDiv = document.getElementById("trailRunAggregate");
-
-//   }
+  function aggregateMiles(trailRunArray){
+	let aggDiv = document.getElementById("trailRunAggregate");
+	let distanceTotal = 0;
+	for (let i = 0; i < trailRunArray.length; i++) {
+		let run = trailRunArray[i];
+		distanceTotal += run.distance;
+		
+	}
+	aggDiv.textContent = `Total Miles Ran: ${distanceTotal}`;
+  }
 
 
   // Event list table creation methods:
