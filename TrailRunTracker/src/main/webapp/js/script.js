@@ -24,6 +24,7 @@ window.addEventListener("load", function (e) {
 		  let trailRunJson = xhr.responseText; // var?
 		  let trailRunArray = JSON.parse(trailRunJson);
 		  createTable(trailRunArray);
+		//   aggregateMiles(trailRunArray);
 		} else if (xhr.status === 404) {
 		  console.log("Runs not found"); // make a display error div
 		} else {
@@ -33,6 +34,14 @@ window.addEventListener("load", function (e) {
 	};
 	xhr.send();
   }
+
+//   function aggregateMiles(trailRunArray){
+// 	let aggDiv = document.getElementById("trailRunAggregate");
+
+//   }
+
+
+  // Event list table creation methods:
   
   function createTable(eventArray) {
 	let runTableDiv = document.getElementById("trailRunEventList");
@@ -91,7 +100,7 @@ window.addEventListener("load", function (e) {
   function displayIndividualRun(individualRun){
 	
 	let individualRunDiv = document.getElementById('trailRunDetails');
-	
+	individualRunDiv.textContent = '';
 	let h2 = document.createElement('h2');
 	h2.textContent = 'The ' + individualRun.trailName + ' Run:';
 	individualRunDiv.appendChild(h2);
