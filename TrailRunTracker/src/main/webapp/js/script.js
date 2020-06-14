@@ -26,9 +26,9 @@ window.addEventListener("load", function (e) {
 		  console.log(trailRunArray);
 		  createTable(trailRunArray);
 		} else if (xhr.status === 404) {
-		  console.log("Runs not found"); // make a display error
+		  console.log("Runs not found"); // make a display error div
 		} else {
-		  console.log("Error retrieving all the runs"); // make a display error
+		  console.log("Error retrieving all the runs"); // make a display error div
 		}
 	  }
 	};
@@ -89,12 +89,14 @@ window.addEventListener("load", function (e) {
   }
   
   function displayIndividualRun(individualRun){
+	
 	let individualRunDiv = document.getElementById('trailRunDetails');
+	
 	let h2 = document.createElement('h2');
 	h2.textContent = 'The ' + individualRun.trailName + ' Run:';
 	individualRunDiv.appendChild(h2);
 	let updateForm = document.createElement('form');
-	updateForm.name = 'runUpdateForm'
+	updateForm.name = 'updateForm'
 
 	let trailNameLabel = document.createElement('label');
 	trailNameLabel.for = 'trailName';
@@ -230,6 +232,7 @@ window.addEventListener("load", function (e) {
 		updateForm.appendChild(trailTypeSelect);
 		updateForm.appendChild(document.createElement('br'));
 	}
+	
 
 	let submit = document.createElement('input');
 	submit.name = 'submit';
@@ -237,12 +240,13 @@ window.addEventListener("load", function (e) {
 	submit.value = 'Update Run'
 	submit.addEventListener('click', function(e){
 		e.preventDefault();
-		// postNewRun(individualRun);
+		updateRun(individualRun.id); // pass the id to update the run
 		// updateForm.reset();
 	});
 	updateForm.appendChild(submit);
 
 	individualRunDiv.appendChild(updateForm);
+	
 }
 // select Enum option methods:
   
@@ -270,8 +274,6 @@ function trailOptionRugged() {
   // Create new  methods:
   
   function createNewRun() {
-  
-	  
 	  let form = document.createRunForm;
 	  let trailRun = {};
 	  trailRun.trailName = form.trailName.value;
@@ -298,7 +300,7 @@ function trailOptionRugged() {
 	  xhr.onreadystatechange = function() {
 		  if (xhr.readyState === 4) {
 			  if (xhr.status === 200 || xhr.status === 201) {
-				  let createdTrailRun = JSON.parse(xhr.responseText);
+				//   let createdTrailRun = JSON.parse(xhr.responseText); // if I wanted to do something with it individually other than refreshing the table below;
 				  getEvents();
 			  }
 			  else {
@@ -313,4 +315,51 @@ function trailOptionRugged() {
 		  }
 	  };
 	  xhr.send(trailRunJson);
+  }
+
+  // Update Run methods:
+
+  function updateRun(runId) {
+	  let form = document.updateForm;
+	  let trailRun = {};
+	  trailRun.id = runId;
+	  trailRun.trailName = form.trailName.value;
+      trailRun.location = form.location.value;
+      trailRun.date = form.date.value;
+      trailRun.totalTime = form.totalTime.value;
+      trailRun.distance = form.distance.value;
+      trailRun.elevationGain = form.elevationGain.value;
+      trailRun.maxHeartRate = form.maxHeartRate.value;
+      trailRun.avgHeartRate = form.avgHeartRate.value;
+      trailRun.description = form.description.value;
+      trailRun.trailType = form.trailType.value;
+	  trailRun.active = true;
+	  console.log(trailRun);
+	  updateRunXHR(trailRun);
+  } 
+
+  function updateRunXHR(individualRun) {
+  	let runJson = JSON.stringify(individualRun);
+  	let xhr = new XMLHttpRequest();
+  	let uri = `api/trailruns/${individualRun.id}`;
+  	xhr.open('PUT', uri);
+  	xhr.setRequestHeader('Content-type', 'application/json');
+  	xhr.onreadystatechange = function (){
+  		if (xhr.readyState === 4){
+  			if (xhr.status === 200) {
+				  getEvents(); // reload the list of events after the update
+				  console.log(runJson);
+  			}
+  			else {
+  				if (xhr.status === 400){
+  					console.log('Invalid run data, unable to update')
+  					// TODO: make an error div pop up
+  				}
+  				else if (xhr.status === 404) {
+  					console.log('Not found, invalid Run');
+  				}
+  			}
+  		}
+  	};
+  	xhr.send(runJson);
   }
