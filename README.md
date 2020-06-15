@@ -8,9 +8,9 @@ Phase I of a multi-week project to design a Full-Stack Trail Run Workout Tracker
 
 This project involved designing a Database schema, populating the Database with some initial entries to test CRUD on; as well as creating a JPA Project tied to a Spring Boot App with the goal of publishing REST API CRUD Endpoints. There is one Java entity class POJO to start, that is mapped with JPA, from a trail_run table in my MySQL Database. It will be a build-upon project, and this portion was the back-end setup, focusing on CRUD operations with Spring Data JPA Repositories and Service classes. There is one POJO "TrailRun" for each Trail Run Event to be tracked.  J-Unit Jupiter tests were utilized to test my POJO mappings/data fields, as well as to test my Repository query methods.  Postman was used to test the Controller methods and their subsequent Request Mappings.  The section below contains the API Endpoints that were developed and can be tested in Postman.
 
-Phase II Update -- Week 2 --:
+Phase II Update - Week 2:
 
-The second phase of this project involved writing a dynamic HTML Front-end, mostly with JavaScript with very limited hard-coded HTML, to have one index.html page be updated depending on Javascript click-events.  For example, Javascript was used to build a table that contains a list of the events.  If one event is clicked on, a div is targeted and a pre-populated Form gets displayed on the page, allowing a user to Update or Delete an event.  An aggregate method was also used to display the total distance of all the events (in miles), and changes depending on if a run event is updated/deleted/created.  
+The second phase of this project involved writing an HTML Front-end, mostly with JavaScript with very limited hard-coded HTML, to have one index.html page be updated depending on Javascript click-events.  Javascript was used to build a table that contains a list of all the trail run events that are being tracked.  If one event is clicked on, a div is targeted by id and a pre-populated Form gets displayed on the page, allowing a user to Update or Delete an event.  An aggregate method was also used to display the total distance of all the events (in miles), and changes depending on if a run event is updated/deleted/created.  A user can also create a new trail run from the home page, and after successfully doing so the list of runs will update to reflect it.
 
 ## API Endpoints
 
@@ -40,7 +40,10 @@ The second phase of this project involved writing a dynamic HTML Front-end, most
 
 Phase 2 Added Technologies:
 
+* JavaScript
+* HTML
 * Visual Studio Code
+
 
 ## Lessons Learned - Phase 1
 
@@ -51,8 +54,8 @@ Phase 2 Added Technologies:
 
 ## Lessons Learned - Phase 2
 
-* JavaScript is really elusive and tricky at first.  It was a challenge to go from writing Java in such a controlled environment to trying to debug problems with JavaScript code.
-* This project involved the most "hacking" I've ever had to do.  JavaScript is so new to me, despite it's similarities to Java, I learned a ridiculous amount playing around with it and forcing my way through the code.
+* JavaScript is really elusive and tricky at first.  It was a challenge to go from writing Java in such a controlled environment to trying to debug problems with JavaScript code in the browser, especially since sometimes after rebooting my project, I would have to clear my browsers cache to get the changes reflected to show.
+* This project involved the most "hacking" I've ever had to do in this course.  JavaScript is so new to me, despite it's similarities to Java, but I learned so much playing around with it and forcing my way through the code one step at a time.
 * It's never been more true to test every baby step you make with JS compared to other languages, I got ahead of myself a few times, then tested my Create method that was working fine, and found out the hard way that new code I wrote affected and changed what originally worked fine.  I got in the habit of testing all my CRUD operations each time I made a major change to make sure everything was still compliant.
-* After only learning a weeks worth of JavaScript and being able to write 400+ lines of it to make this project meet MVP, I was incredibly impressed with how far I had come and this project really solidified a lot of my JS knowledge -- but also showed how much more I have to learn.  I do feel more confident with the language however, and look forward to dialing it in more with practice.  The potential for Front End development is really huge and it opened up a world of opportunities for me.
-* A huge win was being able to get my Enum Trail type select drop down menu in the Form to dynamically display the proper choice when a user clicks on an event.  For example, if a trail was defined as 'Light', when it was clicked on the update form would populate that first, with 'Moderate' and 'Rugged' being secondary options.  I accomplished this with a series of 3 if/ else if statements - and 3 methods for building each select elements options for each Enum type; the first statement checked what the individual runs enum trail type was, and depending on that populated the appropriate other two choices.  This was something I really wanted to do for my Midterm but ran out of time, but now I have the code to transfer back to refactor that to get it to work right!
+* After only learning a weeks worth of JavaScript and being able to write 400+ lines of it to make this project meet MVP, I was incredibly impressed with how far I had come, and this project really solidified a lot of my JS knowledge -- but also showed how much more I have to learn.  I do feel more confident with the language however, and look forward to dialing it in more with practice.  The potential for Front End development is really huge using JavaScript and it opened up many opportunities for me for future projects on the Front-End.
+* A huge win was being able to get my Enum Trail type select drop down menu in the Form to dynamically display the proper choice when a user clicks on an event.  For example, if a trail was defined as 'Light', when it was clicked on the update form would populate that first, with 'Moderate' and 'Rugged' being secondary options.  I accomplished this with a series of 3 if/else if statements - and 3 methods for building each select elements' options for each Enum type; the first statement checked what the individual run's Enum trail type was, and depending on that, populated the appropriate other two choices.  This was something I really wanted to do for my Midterm but ran out of time, but now I have the code to transfer back to refactor that to get it to work right!
