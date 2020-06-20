@@ -6,12 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { TrailrunService } from './services/trailrun.service';
 import { TrailrunListComponent } from './components/trailrun-list/trailrun-list.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AddRunComponent } from './components/add-run/add-run.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TrailrunListComponent
+    TrailrunListComponent,
+    NotFoundComponent,
+    AddRunComponent,
   ],
   imports: [
     BrowserModule,

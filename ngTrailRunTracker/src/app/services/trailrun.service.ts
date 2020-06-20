@@ -26,5 +26,32 @@ export class TrailrunService {
       })
     );
   }
+
+  create(newRun: Trailrun){
+    return this.http.post<Trailrun>(this.url, newRun).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error in trailrun service create method');
+      })
+    );
+  }
+
+  update(selected: Trailrun){
+    return this.http.put<Trailrun>(`${this.url}/${selected.id}`, selected).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error in trailrun service update()');
+      })
+    );
+  }
+
+  disable(run: Trailrun){
+    return this.http.put<Trailrun>(`${this.url}/disable/${run.id}`, run).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('error in trailrun service disable()');
+      })
+    );
+  }
 }
 

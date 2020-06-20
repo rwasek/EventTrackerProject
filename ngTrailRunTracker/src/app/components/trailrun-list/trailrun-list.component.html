@@ -1,18 +1,77 @@
-<p>trailrun-list works!</p>
-<table>
-  <thead>
-    <tr>
-      <td>Trail Name</td>
-      <td>Location</td>
-      <td>Distance</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let run of trailRuns">
-      <td >{{run.trailName}}</td>
-      <td>{{run.location}}</td>
-      <td>{{run.distance}}</td>
+<!-- Table of all runs -->
+<div class="jumbotron">
+  <h1>Trail Run Tracker <span class="badge badge-secondary">{{totalDistance}}</span></h1>
 
-    </tr>
-  </tbody>
-</table>
+</div>
+<div *ngIf="!selected" class="container-fluid">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Trail Name</th>
+        <th>Location</th>
+        <th>Distance</th>
+        <th>Trail Type</th>
+        <th>Date</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let run of trailRuns" class="table-secondary">
+        <th scope="row" (click)="displayRun(run)">{{run.trailName}}</th>
+        <td>{{run.location}}</td>
+        <td>{{run.distance}}</td>
+        <td>{{run.trailType | titlecase }}</td>
+        <td>{{run.date}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="deleteRun(run)">X</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+          <p class="secondary">
+            Click a Trail Run to update it!
+          </p>
+
+  <button class="btn btn-success" [routerLink]="['/addrun']">Add Run</button>
+</div>
+
+<!-- View for individual run if selected as prefilled Form -->
+<div *ngIf="selected && editRun" class="container-fluid">
+
+  <form>
+    <div class="form-group">
+      <label for="trailName">Trail Name</label>
+      <input class="form-control" type="text" name="trailName" [(ngModel)]="editRun.trailName">
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input class="form-control" type="text" name="location" [(ngModel)]="editRun.location">
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input class="form-control" type="text" name="date" [(ngModel)]="editRun.date">
+    </div>
+    <div class="form-group">
+      <label for="totalTime">Total Time</label>
+      <input class="form-control" type="text" name="totalTime" [(ngModel)]="editRun.totalTime">
+    </div>
+    <div class="form-group">
+      <label for="distance">Distance</label>
+      <input class="form-control" type="number" step="0.01" name="distance" [(ngModel)]="editRun.distance">
+    </div>
+    <div class="form-group">
+      <label for="trailType">Trail Type</label>
+      <select name="trailType" [(ngModel)]="editRun.trailType">
+        <option value='LIGHT'>Light</option>
+        <option value='MODERATE'>Moderate</option>
+        <option value='RUGGED'>Rugged</option>
+      </select>
+      <br>
+      <button class="btn btn-primary" (click)="updateRun(editRun)">Update Run</button>
+      <button class="btn btn-warning" (click)="goBack()">Go Back</button>
+
+    </div>
+  </form>
+</div>
+
+
