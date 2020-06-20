@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TrailrunService } from 'src/app/services/trailrun.service';
 import { Trailrun } from 'src/app/models/trailrun';
+// import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-trailrun-list',
@@ -8,6 +9,7 @@ import { Trailrun } from 'src/app/models/trailrun';
   styleUrls: ['./trailrun-list.component.css']
 })
 export class TrailrunListComponent implements OnInit {
+  closeResult = '';
 
   totalDistance = 0;
   selected = null;
@@ -16,8 +18,28 @@ export class TrailrunListComponent implements OnInit {
   trailRuns: Trailrun[] = [];
 
   constructor(
-    private trailrunSvc: TrailrunService
+    private trailrunSvc: TrailrunService,
+    // private modalService: NgbModal
     ) { }
+
+    // Modal code for reference:
+    // open(content) {
+    //   this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    //     this.closeResult = `Closed with: ${result}`;
+    //   }, (reason) => {
+    //     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    //   });
+    // }
+
+    // private getDismissReason(reason: any): string {
+    //   if (reason === ModalDismissReasons.ESC) {
+    //     return 'by pressing ESC';
+    //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    //     return 'by clicking on a backdrop';
+    //   } else {
+    //     return `with: ${reason}`;
+    //   }
+    // }
 
     ngOnInit(): void {
       this.loadTrailruns();

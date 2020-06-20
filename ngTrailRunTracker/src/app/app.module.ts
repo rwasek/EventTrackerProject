@@ -8,6 +8,8 @@ import { TrailrunListComponent } from './components/trailrun-list/trailrun-list.
 import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AddRunComponent } from './components/add-run/add-run.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { AddRunComponent } from './components/add-run/add-run.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     TrailrunService
