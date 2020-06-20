@@ -1,0 +1,18 @@
+<p>trailrun-list works!</p>
+<table>
+  <thead>
+    <tr>
+      <td>Trail Name</td>
+      <td>Location</td>
+      <td>Distance</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let run of trailRuns">
+      <td >{{run.trailName}}</td>
+      <td>{{run.location}}</td>
+      <td>{{run.distance}}</td>
+
+    </tr>
+  </tbody>
+</table>
