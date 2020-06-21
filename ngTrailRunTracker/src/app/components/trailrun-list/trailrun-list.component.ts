@@ -85,8 +85,8 @@ export class TrailrunListComponent implements OnInit {
       }
 
       // Update run
-      updateRun(selected: Trailrun){
-        this.trailrunSvc.update(selected).subscribe(
+      updateRun(editRun: Trailrun){
+        this.trailrunSvc.update(editRun).subscribe(
           data => {
             this.loadTrailruns();
             this.selected = null;

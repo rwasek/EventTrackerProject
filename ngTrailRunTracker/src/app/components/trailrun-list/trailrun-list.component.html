@@ -1,6 +1,7 @@
 <!-- Table of all runs -->
-<div class="jumbotron">
-  <h1>Trail Run Tracker <span class="badge badge-secondary">{{totalDistance}} Total Miles Logged</span></h1>
+
+<div class="jumbotron-fluid">
+  <h1 class="titleJumbo">Trail Run Tracker  <span class="badge badge-secondary">{{totalDistance}} Total Miles Logged</span></h1>
 </div>
 <div *ngIf="!selected" class="container-fluid">
   <table class="table table-hover">
@@ -25,25 +26,17 @@
           <button class="btn btn-danger" (click)="deleteRun(run)">X</button>
         </td>
       </tr>
-
-
       <p id="updateLine">
         Click a Trail Run to update it!
       </p>
-
-
     </tbody>
   </table>
-
-
-
   <button class="btn btn-success" [routerLink]="['/addrun']">Add Run</button>
 </div>
 
 <!-- View for individual run if selected as prefilled Form -->
 <div *ngIf="selected && editRun" class="container-fluid">
-
-  <form>
+  <form class="editForm">
     <div class="form-group">
       <label for="trailName">Trail Name</label>
       <input class="form-control" type="text" name="trailName" [(ngModel)]="editRun.trailName">
@@ -65,7 +58,7 @@
       <input class="form-control" type="number" step="0.01" name="distance" [(ngModel)]="editRun.distance">
     </div>
     <div class="form-group">
-      <label for="trailType">Trail Type</label>
+      <label for="trailType">Trail Type</label><br>
       <select name="trailType" [(ngModel)]="editRun.trailType">
         <option value='LIGHT'>Light</option>
         <option value='MODERATE'>Moderate</option>
@@ -74,7 +67,6 @@
       <br>
       <button class="btn btn-primary" (click)="updateRun(editRun)">Update Run</button>
       <button class="btn btn-warning" (click)="goBack()">Go Back</button>
-
     </div>
   </form>
 </div>
