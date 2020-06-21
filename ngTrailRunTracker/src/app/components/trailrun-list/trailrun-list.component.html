@@ -1,7 +1,7 @@
 <!-- Table of all runs -->
 
 <div class="jumbotron-fluid">
-  <h1 class="titleJumbo">Trail Run Tracker  <span class="badge badge-secondary">{{totalDistance}} Total Miles Logged</span></h1>
+  <h1 class="titleJumbo">Trail Run Tracker  <span class="badge badge-secondary">{{totalDistance | number}} Total Miles Logged</span></h1>
 </div>
 <div *ngIf="!selected" class="container-fluid">
   <table class="table table-hover">

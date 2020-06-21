@@ -12,6 +12,10 @@ Phase II Update - Week 2:
 
 The second phase of this project involved writing an HTML Front-end, mostly with JavaScript with very limited hard-coded HTML, to have one index.html page be updated depending on Javascript click-events.  Javascript was used to build a table that contains a list of all the trail run events that are being tracked.  If one event is clicked on, a div is targeted by id and a pre-populated Form gets displayed on the page, allowing a user to Update or Delete an event.  An aggregate method was also used to display the total distance of all the events (in miles), and changes depending on if a run event is updated/deleted/created.  A user can also create a new trail run from the home page, and after successfully doing so the list of runs will update to reflect it.
 
+Phase III Update - Week 3:
+
+The final phase of the project was developing an Angular Front-end framework, completely replacing the vanilla Javascript Front-end I wrote the week prior.  Developed with Angular components, services and pipes.  I designed an Angular model based off my Java Entity in the connected Spring application.  The home page displays a list of Trail Run events to the User, which can be individually clicked on bringing the User to a pre-filled update form of that run.  Runs can be deleted by the click of a button in the table on the home page, and a new run can be added as well.  A live aggregate total distance of all the runs is updated in the header as they are changed/added.
+
 ## API Endpoints
 
 |Returns   | Verb        | URI    | Description |
@@ -44,6 +48,10 @@ Phase 2 Added Technologies:
 * HTML
 * Visual Studio Code
 
+Phase 3 Added Technologies:
+
+* Angular
+* CSS
 
 ## Lessons Learned - Phase 1
 
@@ -59,3 +67,10 @@ Phase 2 Added Technologies:
 * It's never been more true to test every baby step you make with JS compared to other languages, I got ahead of myself a few times, then tested my Create method that was working fine, and found out the hard way that new code I wrote affected and changed what originally worked fine.  I got in the habit of testing all my CRUD operations each time I made a major change to make sure everything was still compliant.
 * After only learning a weeks worth of JavaScript and being able to write 400+ lines of it to make this project meet MVP, I was incredibly impressed with how far I had come, and this project really solidified a lot of my JS knowledge -- but also showed how much more I have to learn.  I do feel more confident with the language however, and look forward to dialing it in more with practice.  The potential for Front End development is really huge using JavaScript and it opened up many opportunities for me for future projects on the Front-End.
 * A huge win was being able to get my Enum Trail type select drop down menu in the Form to dynamically display the proper choice when a user clicks on an event.  For example, if a trail was defined as 'Light', when it was clicked on the update form would populate that first, with 'Moderate' and 'Rugged' being secondary options.  I accomplished this with a series of 3 if/else if statements - and 3 methods for building each select elements' options for each Enum type; the first statement checked what the individual run's Enum trail type was, and depending on that, populated the appropriate other two choices.  This was something I really wanted to do for my Midterm but ran out of time, but now I have the code to transfer back to refactor that to get it to work right!
+
+## Lessons Learned - Phase 3
+
+* Angular is a very fluid and responsive front-end framework tool! I had a lot of fun playing around with it, and I'm excited to dive into all the tools Angular offers.  This project was much easier to design compared to meeting the same requirements the weekend prior in vanilla Javascript.
+* Spent a lot of time hacking up my code before realizing I missed the annotation in the Spring project to connect to the browser local server I was serving the Angular app on.
+* Played around with components, making my Add run form as its own component piece.
+* Making Front-end changes and watching them immediately become reflected in the browser without having to reboot the Spring app for every change allows for much more fluid and efficient design!
