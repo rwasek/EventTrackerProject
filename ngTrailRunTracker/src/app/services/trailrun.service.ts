@@ -3,14 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Trailrun } from '../models/trailrun';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrailrunService {
 
-  private baseUrl = 'http://localhost:8084/';
-  private url = this.baseUrl + 'api/trailruns';
+  // private baseUrl = 'http://localhost:8084/';
+  private url = environment.baseUrl + 'api/trailruns';
 
   constructor(
     private http: HttpClient
